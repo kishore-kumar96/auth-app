@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "bd0c6941-6670-437b-8cf6-8de81645de14",
+		"name": "my-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Singup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"test\",\n    \"email\":\"test2@test.com\",\n    \"phone\":\"134567890\",\n    \"password\":\"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3013/api/users/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3013",
+					"path": [
+						"api",
+						"users",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"test1@test.com\",\n    \"password\":\"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3013/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3013",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3013/api/users/61ea63d7e640974d5282eb4d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3013",
+					"path": [
+						"api",
+						"users",
+						"61ea63d7e640974d5282eb4d"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
